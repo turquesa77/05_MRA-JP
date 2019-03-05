@@ -1,0 +1,87 @@
+
+// headInfo ------------------------------
+.headInfo {
+	padding: 10px;
+	@include font-size(14);
+	&--inner {
+		display: flex;
+		flex-flow: row;
+		justify-content: space-between;
+		@include media(sp) {
+			flex-flow: column;
+			padding: 0 10px;
+		}
+		&:after {
+			content: none;
+		}
+	}
+	&__date {
+		@include media(sp) {
+			margin-bottom: 5px;
+		}
+	}
+	&__lang {
+		li {
+			display: inline-block;
+			+ li {
+				margin-left: 10px;
+			}
+			a {
+				display: block;
+				background-color: white;
+				color: $color-bg;
+				border-radius: 20px;
+				border: 1px solid transparent;
+				padding: 2px 20px;
+				transition: all 0.3s ease;
+				&:hover {
+					background-color: $color-bg;
+					color: white;
+					border: 1px solid white;
+				}
+			}
+		}
+	}
+}
+
+// navi ------------------------------
+.navi {
+	background-color: $color-main;
+	opacity: 0.8;
+	&__list {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		align-items: center;
+		padding: 5px 5px;
+		@include media(sp) {
+			padding: 5px 10px;
+		}
+		&:after {
+			content: none;
+		}
+		li {
+			@include media(sp) {
+				width: 50%;
+				//text-align: center;
+				margin-bottom: 5px;
+			}
+			a {
+				color: $color-bg;
+				@include hoverUnderline;
+				&:after {
+					background: $color-bg;
+				}
+			}
+		}
+		&__logo {
+			@include media(sp) {
+				width: 100% !important;
+				text-align: center;
+			}
+			img {
+				width: 110px;
+			}
+		}
+	}
+}

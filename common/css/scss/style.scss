@@ -1,0 +1,1039 @@
+/* Scss Document */
+
+@charset "UTF-8";
+
+// --------------------------------------------
+// style guide
+// 基本的な考えは、FLOCSS（https://github.com/..）ベース。
+// 
+// #命名規則
+// BEMをベースに以下のルールで記載。
+// block__element--modifier
+// Blockが複数単語になる場合は、「blockName」のようにキャメルケースにする。
+// 
+// --------------------------------------------
+
+// ============================================
+// import css
+// ============================================
+
+	// reset css
+	@import 'reset';
+	// settings
+	@import 'settings';
+	// navi
+	@import 'navi';
+	// "slick" slide show
+	@import 'slick';
+	@import 'slick-theme';
+
+// Title ------------------------------
+
+// Underline
+.title1 {
+	text-align: center;
+	margin-bottom: 30px;
+	&__head {
+		display: inline-block;
+		@include font-size(24);
+		font-weight: 600;
+		color: white;
+		position: relative;
+		padding-left: 10px;
+		padding-right: 10px;
+		box-sizing: border-box;
+		@include media(sp) {
+			@include font-size(20);
+		}
+		&:before{
+			content: "";
+			width: 100%;
+			height: 8px;
+			position: absolute;
+			bottom: 2px;
+			left: 0px;
+			background-color: rgba($color-main, 0.7);
+			z-index: -1;
+		}
+	}
+}
+// title1を継承: 下層ページタイトル
+.subPage-title {
+	@extend .title1;
+	@include space;
+	margin-bottom: 0;
+	.title1__head {
+		@include font-size(38);
+	}
+}
+
+// Underline
+.title2 {
+	@include font-size(40); // JP 20px EN 28px
+	font-family: $font-base-EN-Oswald;
+	font-weight: 700;
+	text-align: center;
+	margin-bottom: 30px;
+	&:after {
+		content: "";
+		display: block;
+		width: 80px;
+		height: 4px;
+		background-color: $color-sub1;
+		margin: 20px auto 0;
+	}
+}
+
+// Background-color
+.title3 {
+	color: $color-bg;
+	@include font-size(20);
+	text-align: center;
+	background-color: $color-main;
+	padding: 6px 0;
+}
+
+// Border-left
+.title4 {
+	font-weight: 400;
+	@include font-size(20);
+	border-left: 5px solid $color-sub1;
+	border-bottom: 1px solid $color-sub1;
+	padding-left: 10px;
+}
+
+// Arrow ------------------------------
+@mixin arrow-down {
+	content: "";
+	width: 20px;
+	height: 20px;
+	border: 2px solid;
+	border-color:  transparent transparent $color-main $color-main;
+	transform: rotate(-45deg);
+}
+
+// pageNav ------------------------------
+.pageNav {
+	@include space-btm;
+	&--inner {
+		max-width: 400px;
+		@include media(sp) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	&__list {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		align-items: center;
+		@include media(sp) {
+			justify-content: space-around;
+		}
+		li {
+			background-color: $color-main;
+			padding-right: 15px;
+			margin-bottom: 5px;
+			position: relative; // arrow down
+			@include hoverOpc;
+			&:after {
+				position: absolute;
+				top: 4px;
+				right: 15px;
+				@include arrow-down;
+				border-color:  transparent transparent black black;
+			}
+			a {
+				color: $color-sub2;
+				display: block;
+				width: 100%;
+				padding: 8px 35px 8px 20px;
+			}
+		}
+	}
+}
+
+// keyVisual ------------------------------
+.keyVisual {
+	width: 100%;
+	&__show {
+		width: 100%;
+		height: 410px;
+		overflow: hidden;
+		position: relative;
+	}
+	&__head {
+		position: absolute;
+		top: 10%;
+		display: flex;
+		flex-flow: row wrap;
+		//justify-content: space-between;
+		@include media(sp) {
+			top: 10%;
+		}
+		&__title {
+			color: $color-bg;
+			background-color: rgba($color-main, 0.8);
+			padding: 20px 60px 20px 20px;
+
+			@include font-size(48);
+			font-family: $font-base-EN-Oswald;
+			font-weight: 700;
+			@include media(sp) {
+				@include font-size(40);
+				text-align: center;
+			}
+		}
+		&__supporter {
+			max-width: 600px;
+			background-color: rgba(white, 0.9);
+			padding: 10px 20px;
+			@include media(sp) {
+				margin-top: 10px;
+			}
+		}
+		&__btn {
+			text-align: center;
+			margin-left: 50px;
+			@include media(sp) {
+				margin: 10px auto 0;
+			}
+			@media screen and (max-width: 1100px) {
+				display: none;
+			}
+			a {
+				@include media(sp) {
+					padding: 10px !important;
+				}
+			}
+		}
+		&__fs19 {
+			@include font-size(19);
+		}
+		&--plant {
+			a {
+				font-size: 16px !important;
+			}
+			&__bold {
+				font-weight: bold;
+				@include font-size(20);
+			}
+		}
+		&--doc a {
+			font-size: 20px !important;
+		}
+		&__kosha {
+			span {
+				display: inline-block;
+				background-color: rgba(black, 0.7);
+				padding: 5px 10px;
+			}
+			a {
+				@include hoverOpc;
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+}
+
+.mobile__btn {
+	padding: 20px 10px;
+	display: none;
+	@media screen and (max-width: 1100px) {
+		display: block;
+	}
+}
+
+// about ------------------------------
+.about {
+	&--inner {
+		max-width: $width-main;
+		@include space;
+		@include space-btm2;
+		@include media(sp) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	&__lead {
+		@include font-size(20);
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	&__desc {
+		line-height: 1.75;
+	}
+}
+
+// outline ------------------------------
+.outline {
+	padding: 80px 0;
+	background-image: url(#{$imgDir}bg_outline.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	@include media(sp) {
+		padding: 80px 10px;
+	}
+	&--inner {
+		max-width: $width-sub;
+	}
+	&__tbl {
+		width: 100%;
+		background-color: white;
+		color: $color-bg;
+		th, td {
+			border: 1px solid $color-sub1;
+			padding: 18px;
+		}
+		&__title {
+			background-color: $color-sub1;
+			font-family: $font-base-EN-Oswald;
+			font-weight: 500;
+			color: white;
+			@include font-size(20);
+		}
+		&__th {
+			background-color: lighten($color-sub1, 35%);
+			text-align: center;
+			vertical-align: middle;
+		}
+	}
+	&__category {
+		a {
+			display: flex;
+			width: 100%;
+			color: $color-sub1;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			padding: 5px 0 0 35px;
+			position: relative;
+			&:before {
+				content: url(#{$imgDir}icon_arrow_down.svg);
+				display: inline-block;
+				width: 25px;
+				height: 25px;
+				padding-right: 10px;
+				position: absolute;
+				left: 0;
+			}
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+	}
+}
+
+// shows ------------------------------
+.shows {
+	@include space;
+	&__unit {
+		background-color: rgba(white, 0.99);
+		color: $color-bg;
+		text-align: center;
+		+ .shows__unit {
+			margin-top: 50px;
+		}
+	}
+	&__subUnit {
+		padding: 50px 10px;
+	}
+	&__title {
+		background-color: $color-main;
+		@include font-size(22);
+		padding: 15px 10px;
+	}
+	&__logo {
+		margin-bottom: 15px;
+		text-align: center;
+		a {
+			display: inline-block;
+			max-width: 500px;
+		}
+	}
+	&__desc {
+		margin-bottom: 15px;
+	}
+	&__slideUnit {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+	&__slider1, slider2 {
+		padding: 0;
+	}
+}
+
+// exhibit__fee ------------------------------
+.exhibit__fee {
+	@include space;
+	background-color: white;
+	background-image: url(#{$imgDir}bg_fee.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	&--inner {
+		max-width: $width-sub;
+	}
+	&__title {
+		color: darken($color-sub1, 20%);
+		border-top: 3px solid $color-sub1;
+		border-bottom: 3px solid $color-sub1;
+		background-color: white;
+		margin-bottom: 30px;
+	}
+	&__tbl {
+		width: 95%;
+		background-color: white;
+		color: $color-bg;
+		margin: 0 auto;
+		&--space {
+			margin-bottom: 60px;
+		}
+		th, td {
+			border: 1px solid $color-sub1;
+			padding: 18px;
+			vertical-align: middle;
+			@include media(sp) {
+				padding: 10px;
+			}
+		}
+		&__title {
+			background-color: $color-sub1;
+			//font-family: $font-base-EN-Oswald;
+			//font-weight: 500;
+			color: white;
+			@include font-size(20);
+			&__append {
+				@include font-size(15);
+			}
+		}
+		&__th {
+			background-color: lighten($color-sub1, 35%);
+			&--pk {
+				text-align: left;
+				max-width: 230px;
+				a {
+					color: $color-sub2;
+					@include hoverOpc;
+				}
+				span {
+					display: inline-block;
+					width: 40px;
+					height: 40px;
+					background-color: $color-sub1;
+					color: white;
+					@include font-size(24);
+					border-radius: 50%;
+					text-align: center;
+					margin-right: 10px;
+				}
+			}
+		}
+		&__right {
+			text-align: right;
+		}
+	}
+}
+
+.booth {
+	width: 95%;
+	margin: 50px auto;
+	&__title {
+		width: 100%;
+		color: white;
+		background-color: $color-sub1;
+		position: relative;
+		&__num {
+			position: absolute;
+			top: -15px;
+			left: -25px;
+			width: 70px;
+			height: 70px;
+			background-color: white;
+			color: $color-sub1;
+			@include font-size(40);
+			border: 2px solid $color-sub1;
+			border-radius: 50%;
+		}
+	}
+	&__unit {
+		display: flex;
+		flex-flow: row wrap;
+		color: $color-sub2;
+		background-color: white;
+		padding: 40px;
+		@include media(sp) {
+			flex-flow: column;
+		}
+		&--left {
+			width: 50%;
+			padding-right: 40px;
+			@include media(sp) {
+				width: 100%;
+				padding-right: 0;
+				margin-bottom: 30px;
+			}
+		}
+		&--right {
+			width: 50%;
+			@include media(sp) {
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+	&__tbl {
+		width: 90%;
+		@include media(sp) {
+			width: 100%;
+		}
+		tr {
+			&:nth-child(1) {
+				border-bottom: 1px solid $color-sub1;
+			}
+			&:nth-child(2n+3) {
+				background-color: lighten($color-sub1, 33%);
+			}
+			th {
+				text-align: left;
+				@include font-size(18);
+			}
+			td {
+				padding: 5px 10px;
+			}
+		}
+	}
+}
+
+// exhibit__products ------------------------------
+.exhibit__products {
+	@include space;
+	&--inner {
+		max-width: $width-sub;
+	}
+	&__title {
+		color: darken($color-sub1, 20%);
+		border-top: 3px solid $color-sub1;
+		border-bottom: 3px solid $color-sub1;
+		background-color: white;
+		margin-bottom: 40px;
+	}
+}
+
+%categoryBodyBase {
+	border: 1px solid $color-sub1;
+	margin-bottom: 20px;
+	background-color: white;
+	color: $color-bg;
+}
+%categoryBodyList {
+	&:before {
+		content: "●";
+		color: $color-sub1;
+		padding-right: 5px;
+	}
+}
+.categoryDetail {
+	margin-bottom: 60px;
+	@include media(sp) {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	&--inner {
+		max-width: $width-sub;
+	}
+	&--subInner {
+		width: 90%;
+		margin: 0 auto;
+		@include media(sp) {
+			width: 100%;
+		}
+	}
+	&__subTitle1 {
+		margin-bottom: 20px;
+	}
+	&__subTitle2 {
+		background-color: $color-sub1;
+		color: white;
+	}
+	figure {
+		margin-bottom: 20px;
+		img {
+			box-shadow: 0 0 10px 0 #888;
+		}
+	}
+	&__list {
+		@extend %categoryBodyBase;
+		padding: 20px;
+		li {
+			display: inline-block;
+			line-height: 1.8;
+			margin-right: 15px;
+			@extend %categoryBodyList;
+		}
+		&__right {
+			display: block !important;
+			text-align: right;
+			margin-right: 0 !important;
+			font-weight: 600;
+			margin-left: auto;
+			&:before {
+				content: none !important;
+			}
+		}
+	}
+	&__txt {
+		@extend %categoryBodyBase;
+		padding: 10px;
+	}
+	&__define {
+		@extend %categoryBodyBase;
+		line-height: 1.8;
+		padding: 20px;
+		dt {
+			color: $color-sub1;
+			font-weight: bold;
+			@extend %categoryBodyList;
+		}
+		dd {
+			padding-left: 20px;
+		}
+	}
+}
+
+// visitor ------------------------------
+.visitor {
+	background-color: darken($color-sub2, 5%);
+	&--inner {
+		max-width: $width-sub;
+		@include space;
+		@include media(sp) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	&__lead {
+		text-align: center;
+		@include font-size(18);
+		margin-bottom: 30px;
+		img {
+			max-width: 100px;
+			margin: 0 10px;
+		}
+	}
+	&__slideUnit {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+	&__slider {
+		padding: 0;
+	}
+	&__list {
+		@include space-btm;
+		&__title {
+			background-color: $color-sub1;
+			text-align: center;
+			@include font-size(22);
+			padding: 10px;
+		}
+		&__body {
+			background-color: white;
+			color: $color-bg;
+			padding: 20px 30px;
+			@include media(sp) {
+				padding: 10px 20px;
+			}
+			li {
+				display: inline;
+				line-height: 2.3;
+				margin-right: 5px;
+				&:before {
+					content: "●";
+					color: $color-sub1;
+					margin-right: 2px;
+				}
+			}
+		}
+		&__status {
+			font-weight: 600;
+			&:before {
+				content: none !important;
+			}
+			@include media(sp) {
+				br {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+// contact ------------------------------
+.contact {
+	@include space;
+	color: $color-bg;
+	font-family: $font-base-EN-Oswald;
+	font-weight: 300;
+	background-color: $color-main;
+	&--inner {
+		max-width: 850px;
+	}
+	&__unit {
+		display: flex;
+		flex-flow: row;
+		//justify-content: center;
+		//align-items: center;
+		@include media(sp) {
+			flex-flow: column;
+		}
+		+ .contact__unit {
+			margin-top: 50px;
+			@include media(sp) {
+				margin-top: 30px;
+			}
+		}
+	}
+	&__title {
+		@include font-size(24);
+		font-weight: 400;
+		padding: 20px 30px;
+		@include media(sp) {
+			padding: 10px 20px;
+		}
+		&__area {
+			display: inline-block;
+			background-color: $color-bg;
+			color: white;
+			padding: 3px 15px;
+			margin-top: 5px;
+		}
+	}
+	&__adr {
+		border-left: 1px solid rgba($color-bg,0.3);
+		padding: 20px 0 20px 30px;
+		@include media(sp) {
+			padding: 0 20px;
+		}
+		&__com {
+			display: inline-block;
+			@include font-size(22);
+			margin-bottom: 15px;
+			@include media(sp) {
+				margin-bottom: 0;
+			}
+		}
+		&__num {
+			margin-bottom: 5px;
+			br {
+				display: none;
+				@include media(sp) {
+					display: inline;
+				}
+			}
+			&__categ {
+				@include font-size(22);
+				padding-right: 10px;
+			}
+			&__body {
+				@include font-size(30);
+				padding-right: 20px;
+				a {
+					color: $color-bg;
+					&[href^="mailto:"] {
+						@include hoverUnderline;
+						&::after {
+							background: $color-bg;
+						}
+					}
+				}
+			}
+		}
+		&__post {
+			@include font-size(16);
+		}
+	}
+	&__logo {
+		display: inline-block;
+		margin-left: 10px;
+		max-width: 80px;
+		a {
+			@include hoverOpc;
+		}
+	}
+}
+
+// footer ------------------------------
+.footer {
+	background-color: $color-sub2;
+	color: white;
+	padding: 25px 5px 0;
+	text-align: center;
+	&__logo {
+		margin-bottom: 20px;
+		img {
+			max-width: 110px;
+		}
+	}
+	&__nav {
+		margin-bottom: 20px;
+		@include font-size(15);
+		li {
+			display: inline;
+			@include media(sp) {
+				display: block;
+			}
+			a {
+				color: white;
+				@include hoverOpc;
+			}
+			&:after {
+				content: "　|　";
+				@include media(sp) {
+					content: none;
+				}
+			}
+			&:last-child:after {
+				content: none;
+			}
+		}
+	}
+	&__copy {
+		@include font-size(14);
+		padding-bottom: 15px;
+	}
+}
+
+#page-top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	a {
+		display: block;
+		width: 70px;
+		@include media(sp) {
+			width: 45px;
+		}
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}
+
+// Button style ------------------------------
+.button {
+	a {
+		display: block;
+		width: 100%;
+		background-color: $color-main;
+		color: $color-bg;
+		@include font-size(22);
+		font-family: $font-base-EN-Oswald;
+		padding: 20px;
+		text-align: center;
+		border: 1px solid $color-bg;
+		transition: all 0.3s ease;
+		&:hover {
+			background-color: $color-bg;
+			color: $color-main;
+			border: 1px solid $color-main;
+		}
+	}
+}
+
+.button-bk {
+	@extend .button;
+	a {
+		background-color: $color-bg;
+		color: $color-main;
+		border: 1px solid $color-main;
+		&:hover {
+			background-color: $color-main;
+			color: $color-bg;
+			border: 1px solid $color-main;
+		}
+	}
+}
+
+// btnArea
+.btnArea {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	@include media(sp) {
+		flex-flow: column;
+	}
+}
+// Download Inquiry & Documents
+.btn-brochure {
+	@include space;
+	@extend .button;
+	max-width: 760px;
+	margin: 0 auto;
+	a {
+		@include font-size(26);
+	}
+	@include media(sp) {
+		padding: 20px 10px 20px 10px;
+	}
+	&--bk {
+		padding-bottom: 30px;
+		a {
+			background-color: $color-bg;
+			border: 1px solid $color-bg;
+			color: white;
+			&:hover {
+				background-color: $color-main;
+				color: $color-bg;
+				border: 1px solid $color-bg;
+			}
+		}
+	}
+}
+// Background Story to launch MRA
+.btn-guide {
+	padding-top: 50px;
+	@extend .button;
+	@include media(sp) {
+		padding-top: 30px;
+	}
+	a {
+		font-family: $font-base-EN;
+		@include font-size(18);
+		padding: 20px 40px;
+	}
+}
+
+// information ------------------------------
+.information {
+	// スクロールバーのデザイン for google, safari
+	::-webkit-scrollbar{
+		width: 10px;
+	}
+	::-webkit-scrollbar-track{
+		background: white;
+		border: none;
+		border-radius: 10px;
+		box-shadow: inset 0 0 2px #777;
+	}
+	::-webkit-scrollbar-thumb{
+		background-color: #E0E0E0;
+		border-radius: 10px;
+		box-shadow: none;
+	}
+	
+	background: white;
+	&--inner {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		color: $color-sub2;
+		padding: 20px;
+		&:before {
+			content: "";
+			display: block;
+			width: 0;
+			min-height: 100px;
+		}
+		@include media(sp) {
+			width: 100%;
+			flex-flow: column;
+			&:before {
+				min-height: 0;
+			}
+		}
+	}
+	&__title {
+		width: 20%;
+		padding-right: 4em;
+		white-space: nowrap;
+		@include media(sp) {
+			width: 100%;
+			text-align: center;
+			padding-right: 0;
+			padding-bottom: 1em;
+		}
+	}
+	&__body {
+		padding-left: 4em;
+		border-left: 1px solid $color-sub2;
+		overflow-y: auto;
+		max-height: 200px;
+		@include media(sp) {
+			padding-left: 0;
+			padding-right: 0;
+			border-left: none;
+		}
+		dt {
+			clear: both;
+			float: left;
+			width: 7em;
+			@include media(sp) {
+				float: none;
+			}
+		}
+		dd {
+			margin-left: 7em;
+			@include media(sp) {
+				margin-left: 0;
+				margin-bottom: 1em;
+			}
+			a {
+				color: $color-sub2;
+				text-decoration: underline;
+				@include hoverOpc;
+			}
+		}
+	}
+	&__new {
+		color: red;
+		margin-right: 10px;
+		font-style: italic;
+	}
+}
+
+// download ------------------------------
+.download {
+	&__btn {
+		max-width: 700px;
+		margin: 50px auto 130px;
+		li {
+			+ li {
+				margin-top: 50px;
+			}
+		}
+	}
+}
+
+.exhibit--subTitle {
+	margin-top: 20px;
+	@include font-size(26);
+}
+
+// report ------------------------------
+.report {
+	&--inner {
+		max-width: 800px;
+		@include media(sp) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	&__desc {
+		@include font-size(18);
+		text-align: center;
+		font-weight: bold;
+	}
+	&__btn {
+		li {
+			margin-bottom: 20px;
+			a {
+				@include font-size(18);
+				padding: 10px;
+			}
+		}
+	}
+	&__fig {
+		max-width: 650px;
+		margin: 0 auto 100px;
+	}
+}
